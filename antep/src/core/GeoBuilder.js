@@ -58,10 +58,10 @@ export class GeoBuilder {
   /** yerel matris içinde öteleme+dönüş (z ekseni etrafında) */
   static local(base, x, y, z, rz = 0) { const m = new THREE.Matrix4().makeRotationZ(rz); m.setPosition(x, y, z); return base.clone().multiply(m); }
   /** Kemer (taş kemer/voussoir dizisi). base: cephe matrisi (orijin = açıklık alt merkezi) */
-  arch(key, base, w, springY, depth, colA, colB = null, n = 11, thick = .34, keyB = null) {
+  arch(key, base, w, springY, depth, colA, colB = null, n = 7, thick = .34, keyB = null) {   /* 7 kemer taşı (11'di): web için üçgen tasarrufu */
     if (this.autoFill !== false) this.archFill('dark', base, w + .02, springY, .012, '#ffffff');
     const r = w / 2 + thick / 2; for (let i = 0; i < n; i++) { const th = Math.PI - (i + .5) / n * Math.PI; const x = Math.cos(th) * r, y = springY + Math.sin(th) * r; const m = GeoBuilder.local(base, x, y, 0, th - Math.PI / 2);
-      const k = (colB && i % 2) ? (keyB || key) : key; this.boxM(k, m, Math.PI * r / n * .985, thick, depth, (colB && i % 2) ? colB : colA, { uvS: 1.5 }); }
+      const k = (colB && i % 2) ? (keyB || key) : key; this.boxM(k, m, Math.PI * r / n * .985, thick, depth, (colB && i % 2) ? colB : colA, { uvS: 1.5, faces: 63 & ~2 }); }   /* arka yüz duvara gömülü: çizilmez */
   }
   /** kemer alınlığını dolduran yarım daire (koyu boşluk) */
   archFill(key, base, w, springY, z = -.05, col = '#ffffff', seg = 12) { const B = this.b(key); const c = C(col); const r = w / 2; const P = (x, y) => { _v.set(x, y, z).applyMatrix4(base); return [_v.x, _v.y, _v.z]; }; const n = (() => { _n.set(0, 0, 1).transformDirection(base); return [_n.x, _n.y, _n.z]; })();

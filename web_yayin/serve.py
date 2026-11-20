@@ -16,6 +16,24 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if any(p == g for g in GIZLI):
             self.send_error(404)
             return
+        # önceden sıkıştırılmış kopya (.gz) varsa ve tarayıcı kabul ediyorsa onu gönder
+        if p.endswith(('.wasm', '.pck', '.js')) and 'gzip' in (self.headers.get('Accept-Encoding') or ''):
+            gz = os.path.join(ROOT, p.lstrip('/') + '.gz')
+            if os.path.isfile(gz):
+                ctype = self.extensions_map.get(os.path.splitext(p)[1], 'application/octet-stream')
+                self.send_response(200)
+                self.send_header('Content-Type', ctype)
+                self.send_header('Content-Encoding', 'gzip')
+                self.send_header('Content-Length', str(os.path.getsize(gz)))
+                self.send_header('Vary', 'Accept-Encoding')
+                self.end_headers()
+                with open(gz, 'rb') as f:
+                    while True:
+                        b = f.read(1 << 20)
+                        if not b:
+                            break
+                        self.wfile.write(b)
+                return
         super().do_GET()
 
     def end_headers(self):

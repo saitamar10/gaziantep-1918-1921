@@ -72,6 +72,14 @@ func _ready() -> void:
 		atm[id] = load("res://grafik/%s.tres" % id)
 	# Compatibility (OpenGL) tümleşik kartlar içindir: düşük başla. Forward+ (Vulkan) ayrı ekran kartı demektir: yüksek başla.
 	quality = "dusuk" if RenderingServer.get_current_rendering_method() == "gl_compatibility" else "yuksek"
+	# tarayıcı (tek iş parçacığı, WebGL): düşük kademeyi daha da hafiflet — yakın ayrıntı ve görüş mesafesi kısa, çözünürlük düşük
+	if OS.has_feature("web"):
+		var w: Dictionary = QUALITY["dusuk"]
+		w["draw"] = 300.0
+		w["detail"] = 65.0
+		w["shadow"] = 35.0
+		w["scale"] = 0.7
+		w["aniso"] = 0
 	var at := ""
 	var chapter := "a"
 	var step := 0

@@ -85,9 +85,10 @@ func _surface(mesh: ArrayMesh, m: Dictionary) -> void:
 		var st := SurfaceTool.new()
 		st.create_from_arrays(arr)
 		st.generate_tangents()
-		st.commit(mesh)
+		st.commit(mesh, Mesh.ARRAY_FLAG_COMPRESS_ATTRIBUTES)
 	else:
-		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
+		# köşe verisi sıkıştırması (konum/uv 16 bit): web paketini ve belleği küçültür
+		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr, [], {}, Mesh.ARRAY_FLAG_COMPRESS_ATTRIBUTES)
 	mesh.surface_set_name(idx, m["m"])
 
 
@@ -180,7 +181,7 @@ func _terrain(t: Dictionary, hero: Dictionary) -> float:
 			arr[Mesh.ARRAY_COLOR] = col
 			arr[Mesh.ARRAY_INDEX] = ind
 			var mesh := ArrayMesh.new()
-			mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
+			mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr, [], {}, Mesh.ARRAY_FLAG_COMPRESS_ATTRIBUTES)
 			ResourceSaver.save(mesh, "res://city/terrain_%d.res" % tiles, ResourceSaver.FLAG_COMPRESS)
 			# uzak sürüm: her 4 köşeden biri (üçgen sayısı 1/16); uzaktaki karolar bununla çizilir
 			var fw := (w - 1) / 4 + 1

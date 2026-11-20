@@ -139,15 +139,15 @@ function groundWindow(G, s, a, b, t, gy, R) { const base = G.frame(a, b, t, 0, g
   G.boxM('dark', GeoBuilder.local(base, 0, y + h / 2, .02), w, h, .06, '#fff', { faces: 1 });
   G.boxM(s.stoneKey, GeoBuilder.local(base, 0, y - .07, .06), w + .3, .14, .2, s.tint.clone().multiplyScalar(.93));       // denizlik
   G.boxM(s.stoneKey, GeoBuilder.local(base, 0, y + h + .1, .04), w + .3, .2, .14, s.tint.clone().multiplyScalar(.93));  // lento
-  for (let k = -1; k <= 1; k++) G.boxM('iron', GeoBuilder.local(base, k * w / 3.2, y + h / 2, .09), .035, h, .035, '#fff');
-  G.boxM('iron', GeoBuilder.local(base, 0, y + h * .5, .09), w, .035, .035, '#fff'); }
+  for (let k = -1; k <= 1; k++) G.boxM('iron', GeoBuilder.local(base, k * w / 3.2, y + h / 2, .09), .035, h, .035, '#fff', { faces: 63 & ~2 & ~16 & ~32 });
+  G.boxM('iron', GeoBuilder.local(base, 0, y + h * .5, .09), w, .035, .035, '#fff', { faces: 63 & ~2 & ~4 & ~8 }); }
 function upperWindow(G, s, a, b, t, y, R, ablakC) { const base = G.frame(a, b, t, 0, y); const w = .85 + R() * .2, h = 1.55 + R() * .25; const arched = s.ablak || R() < .35;
   G.boxM('glass', GeoBuilder.local(base, 0, h / 2, .02), w, h + (arched ? w / 2 : 0), .04, '#fff', { faces: 1 });
   const wc = WOODS[s.lot.id % WOODS.length]; // pencere doğraması
-  G.boxM('wood', GeoBuilder.local(base, 0, h / 2, .05), .06, h, .06, wc); G.boxM('wood', GeoBuilder.local(base, 0, h * .62, .05), w, .06, .06, wc);
-  for (const sx of [-1, 1]) G.boxM('wood', GeoBuilder.local(base, sx * w / 2, h / 2, .05), .07, h, .07, wc);
+  const NB = { faces: 63 & ~2 }; G.boxM('wood', GeoBuilder.local(base, 0, h / 2, .05), .06, h, .06, wc, NB); G.boxM('wood', GeoBuilder.local(base, 0, h * .62, .05), w, .06, .06, wc, NB);
+  for (const sx of [-1, 1]) G.boxM('wood', GeoBuilder.local(base, sx * w / 2, h / 2, .05), .07, h, .07, wc, NB);
   const sc = s.tint.clone().multiplyScalar(.95); G.boxM(s.stoneKey, GeoBuilder.local(base, 0, -.06, .07), w + .34, .14, .22, sc);
-  if (arched) G.arch(s.ablak ? 'basalt' : s.stoneKey, GeoBuilder.local(base, 0, 0, .03), w + .02, h, .16, s.ablak ? ablakC : sc, s.ablak ? s.tint : null, 9, .26, s.stoneKey);
+  if (arched) G.arch(s.ablak ? 'basalt' : s.stoneKey, GeoBuilder.local(base, 0, 0, .03), w + .02, h, .16, s.ablak ? ablakC : sc, s.ablak ? s.tint : null, 7, .26, s.stoneKey);
   else G.boxM(s.stoneKey, GeoBuilder.local(base, 0, h + .14, .04), w + .4, .28, .16, sc);
   if (!arched && R() < .45) for (const sx of [-1, 1]) G.boxM('planks', GeoBuilder.local(base, sx * (w / 2 + .23), h / 2, .05), .44, h, .04, WOODS[(s.lot.id + 2) % WOODS.length].clone().multiplyScalar(1.3), { faces: 1 | 4 | 8 }); }
 function cumba(G, s, a, b, t, R) { const y = s.yTop1 - .15; const base = G.frame(a, b, t, 0, y); const w = 2.8 + R() * .8, h = 2.6, d = .85; const wc = WOODS[(s.lot.id + 1) % WOODS.length];
@@ -221,7 +221,13 @@ function courtyard(G, s, R, props) { const C = s.court, yc = s.gmin + .15; const
   // saksılar
   for (let k = 0; k < 4; k++) props.push(['kup', cx - 2 + R() * 4, yc, cz - 2 + R() * 4, R() * 6, .6 + R() * .3]);
 }
-function eaves(G, s) { const poly = s.wing || s.P; const top = s.wing || s.two ? s.yTop2 : s.yTop1; for (let i = 0; i < poly.length; i++) { const a = poly[i], b = poly[(i + 1) % poly.length]; const L = Math.hypot(b[0] - a[0], b[1] - a[1]); for (let t = .5; t < L; t += .9) G.boxM('wood', G.frame(a, b, t, .25, top - .12), .1, .14, .55, WOODS[3]); } }
+function eaves(G, s) { const poly = s.wing || s.P; const top = s.wing || s.two ? s.yTop2 : s.yTop1;
+  /* mertek yalnız sokak cephesinde (bitişik evlerin arka kenarları görünmez), 1,1 m aralık, duvara gömülü yüz çizilmez */
+  const fr = s.fronts.map(i => [s.P[i], s.P[(i + 1) % s.P.length]]);
+  const onFront = (x, z) => fr.some(([p, q]) => Poly.distToSeg(x, z, p[0], p[1], q[0], q[1])[0] < .6);
+  for (let i = 0; i < poly.length; i++) { const a = poly[i], b = poly[(i + 1) % poly.length]; const L = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    if (!onFront((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)) continue;
+    for (let t = .5; t < L; t += 1.1) G.boxM('wood', G.frame(a, b, t, .25, top - .12), .1, .14, .55, WOODS[3], { faces: 63 & ~2 }); } }
 function gardenDetail(G, s, R, props) { const [cx, cz] = s.lot.c; for (let k = 0; k < 3; k++) { const x = cx + (R() - .5) * 6, z = cz + (R() - .5) * 6; if (Poly.contains(s.P, x, z)) props.push(['kup', x, heightAt(x, z), z, R() * 6, 1]); } }
 /** Parsel ağaçları (taban seviyesinde belirlenir; uzakta basit taç, yakında ayrıntılı model) */
 export function treesFor(s) { const R = rng(s.lot.id * 3571 + 9); const out = [];
