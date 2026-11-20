@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="TextureSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/texture_set.gd" id="1"]
+[ext_resource type="Texture2D" path="res://dokular_deneme/toprak_ph/albedo.jpg" id="2"]
+[ext_resource type="Texture2D" path="res://dokular_deneme/toprak_ph/normal.jpg" id="3"]
+[ext_resource type="Texture2D" path="res://dokular_deneme/toprak_ph/roughness.jpg" id="4"]
+[ext_resource type="Texture2D" path="res://dokular_deneme/toprak_ph/ao.jpg" id="5"]
+
+[resource]
+script = ExtResource("1")
+albedo = ExtResource("2")
+normal = ExtResource("3")
+roughness = ExtResource("4")
+ambient_occlusion = ExtResource("5")
+tile_metres = 2.0
+tint = Color(0.95, 0.95, 1.0, 1)

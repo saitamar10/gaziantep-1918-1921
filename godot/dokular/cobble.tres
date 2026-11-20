@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TextureSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/texture_set.gd" id="1_2epd0"]
+[ext_resource type="Texture2D" path="res://dokular/cobble/albedo.jpg" id="1_bs4mh"]
+[ext_resource type="Texture2D" path="res://dokular/cobble/normal.jpg" id="3_2jpy0"]
+[ext_resource type="Texture2D" path="res://dokular/cobble/roughness.jpg" id="4_sv15u"]
+
+[resource]
+script = ExtResource("1_2epd0")
+albedo = ExtResource("1_bs4mh")
+normal = ExtResource("3_2jpy0")
+roughness = ExtResource("4_sv15u")
+tile_metres = 2.0
+tint = Color(0.98, 1.0, 1.04, 1)

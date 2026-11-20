@@ -1,0 +1,6 @@
+# yayına gitmeyenler: tasarım belgeleri ve referans görselleri, yerel araç ayarları
+docs
+.claude
+.git
+*.md
+!textures/README.md

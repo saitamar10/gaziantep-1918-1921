@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TextureSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/texture_set.gd" id="1_3b6iw"]
+[ext_resource type="Texture2D" path="res://dokular/field/albedo.jpg" id="1_u3vn3"]
+[ext_resource type="Texture2D" path="res://dokular/field/ao.jpg" id="2_dd6an"]
+[ext_resource type="Texture2D" path="res://dokular/field/normal.jpg" id="3_fkjhe"]
+[ext_resource type="Texture2D" path="res://dokular/field/roughness.jpg" id="4_aypg2"]
+
+[resource]
+script = ExtResource("1_3b6iw")
+albedo = ExtResource("1_u3vn3")
+normal = ExtResource("3_fkjhe")
+roughness = ExtResource("4_aypg2")
+ambient_occlusion = ExtResource("2_dd6an")
+tile_metres = 3.0

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TextureSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/texture_set.gd" id="1_78tod"]
+[ext_resource type="Texture2D" path="res://dokular/grass/albedo.jpg" id="1_vdpr6"]
+[ext_resource type="Texture2D" path="res://dokular/grass/ao.jpg" id="2_ooarj"]
+[ext_resource type="Texture2D" path="res://dokular/grass/normal.jpg" id="3_agouy"]
+[ext_resource type="Texture2D" path="res://dokular/grass/roughness.jpg" id="4_22a12"]
+
+[resource]
+script = ExtResource("1_78tod")
+albedo = ExtResource("1_vdpr6")
+normal = ExtResource("3_agouy")
+roughness = ExtResource("4_22a12")
+ambient_occlusion = ExtResource("2_ooarj")

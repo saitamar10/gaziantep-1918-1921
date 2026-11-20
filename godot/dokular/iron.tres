@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TextureSet" format=3]
+
+[ext_resource type="Texture2D" path="res://dokular/iron/albedo.jpg" id="1_5hrug"]
+[ext_resource type="Script" path="res://scripts/texture_set.gd" id="1_ov885"]
+[ext_resource type="Texture2D" path="res://dokular/iron/ao.jpg" id="2_djw0m"]
+[ext_resource type="Texture2D" path="res://dokular/iron/normal.jpg" id="3_qpg4p"]
+[ext_resource type="Texture2D" path="res://dokular/iron/roughness.jpg" id="4_uvhtb"]
+
+[resource]
+script = ExtResource("1_ov885")
+albedo = ExtResource("1_5hrug")
+normal = ExtResource("3_qpg4p")
+roughness = ExtResource("4_uvhtb")
+ambient_occlusion = ExtResource("2_djw0m")
+tile_metres = 1.0

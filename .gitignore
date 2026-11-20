@@ -1,0 +1,18 @@
+# yedekler, indirilen üçüncü taraf ham dosyalar, araç klasörleri
+yedek/
+indirilen/
+.claude/
+.agents/
+*.zip
+# Godot önbellek ve ara çıktılar
+godot/.godot/
+godot/_out/
+godot/city_src/
+godot/hero_src/
+godot/olcum/
+# web derlemesi: büyük paket parçalar hâlinde girer (GitHub 100 MB sınırı)
+web_yayin/index.pck
+# sistem
+Thumbs.db
+desktop.ini
+__pycache__/

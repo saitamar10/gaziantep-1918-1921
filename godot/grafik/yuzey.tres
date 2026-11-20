@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="SurfaceLook" format=3]
+
+[ext_resource type="Script" path="res://scripts/surface_look.gd" id="1_fnadi"]
+
+[resource]
+script = ExtResource("1_fnadi")

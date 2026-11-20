@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="TextureSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/texture_set.gd" id="1_q3lxv"]
+[ext_resource type="Texture2D" path="res://dokular/rubble/albedo.jpg" id="1_uus4o"]
+[ext_resource type="Texture2D" path="res://dokular/rubble/ao.jpg" id="2_omeqo"]
+[ext_resource type="Texture2D" path="res://dokular/rubble/normal.jpg" id="3_5ha81"]
+[ext_resource type="Texture2D" path="res://dokular/rubble/roughness.jpg" id="4_w5g2c"]
+
+[resource]
+script = ExtResource("1_q3lxv")
+albedo = ExtResource("1_uus4o")
+normal = ExtResource("3_5ha81")
+roughness = ExtResource("4_w5g2c")
+ambient_occlusion = ExtResource("2_omeqo")
+tile_metres = 1.8
+tint = Color(1, 1.12, 1.5, 1)

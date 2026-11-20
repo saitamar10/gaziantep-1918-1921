@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="TextureSet" format=3]
+
+[ext_resource type="Texture2D" path="res://dokular/planks/albedo.jpg" id="1_4vrba"]
+[ext_resource type="Script" path="res://scripts/texture_set.gd" id="1_xtwju"]
+[ext_resource type="Texture2D" path="res://dokular/planks/ao.jpg" id="2_i0i3m"]
+[ext_resource type="Texture2D" path="res://dokular/planks/normal.jpg" id="3_qpr1t"]
+[ext_resource type="Texture2D" path="res://dokular/planks/roughness.jpg" id="4_xd15p"]
+
+[resource]
+script = ExtResource("1_xtwju")
+albedo = ExtResource("1_4vrba")
+normal = ExtResource("3_qpr1t")
+roughness = ExtResource("4_xd15p")
+ambient_occlusion = ExtResource("2_i0i3m")
+tile_metres = 1.8
+tint = Color(1.5, 2, 3, 1)

@@ -1,0 +1,5 @@
+duvar: sararmış Antep kalkeri, pürüzlü yüz, derin derz, kama taşları; doku kenarı 2.00 m (2048 px, 0.98 mm/px)
+sıra yükseklikleri (cm): 37, 36, 7, 25, 20, 19, 40, 17
+taş boyu 25–90 cm, derz 8–40 mm (kırık kenarlı)
+alt kısım nemi doku içinde değil: gölgelendiricide dünya yüksekliğine göre verilmeli
+tile_metres=2.00

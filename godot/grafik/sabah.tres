@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Atmosphere" format=3]
+
+[ext_resource type="Script" path="res://scripts/atmosphere.gd" id="1_mqehq"]
+
+[resource]
+script = ExtResource("1_mqehq")
+ad = "Sabah"
+sun_color = Color(1, 0.9, 0.76, 1)
+sun_energy = 1.25
+sun_elevation = -17.0
+sun_azimuth = 105.0
+ambient_color = Color(0.62, 0.61, 0.6, 1)
+ambient_energy = 0.7
+fog_color = Color(0.8, 0.8, 0.8, 1)
+haze = 0.8
+fog_begin = 30.0
+fog_end = 1100.0
+sky_top = Color(0.3, 0.46, 0.7, 1)
+sky_horizon = Color(0.86, 0.82, 0.76, 1)
+cloud_color = Color(1, 0.94, 0.86, 1)
+cloud_cover = 0.6

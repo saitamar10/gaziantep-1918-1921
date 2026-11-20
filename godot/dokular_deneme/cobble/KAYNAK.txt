@@ -1,0 +1,4 @@
+kaldırım: gevşek sıralı köşeli kalker taşlar, doku kenarı 2.40 m (2048 px, 1.17 mm/px)
+sıra genişlikleri (cm): 20, 22, 13, 16, 17, 16, 15, 18, 23, 14, 17, 16, 19, 13
+taş boyu 14–30 cm, aralık 6–18 mm toprak, seyrek ot
+tile_metres=2.40

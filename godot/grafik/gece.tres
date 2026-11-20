@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Atmosphere" format=3]
+
+[ext_resource type="Script" path="res://scripts/atmosphere.gd" id="1_lcy1v"]
+
+[resource]
+script = ExtResource("1_lcy1v")
+haze = 0.88
+fog_begin = 25.0
+fog_end = 520.0
+mountains = 0.6
+ad = "Gece"
+sun_color = Color(0.4, 0.55, 1, 1)
+sun_energy = 0.3
+sun_elevation = -52.0
+sun_azimuth = 40.0
+ambient_color = Color(0.22, 0.3, 0.5, 1)
+ambient_energy = 0.95
+fog_color = Color(0.06, 0.08, 0.14, 1)
+fog_density = 0.0017
+sky_top = Color(0.01, 0.015, 0.04, 1)
+sky_horizon = Color(0.05, 0.07, 0.13, 1)
+ground_horizon = Color(0.04, 0.05, 0.08, 1)
+ground_bottom = Color(0.01, 0.01, 0.02, 1)
+cloud_color = Color(0.07, 0.09, 0.14, 1)
+cloud_cover = 0.6
+exposure = 0.85
+saturation = 0.5
+contrast = 1.06

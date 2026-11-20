@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Gaziantep 1918–1921 · Bir Şehrin 11 Ayı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<script type="importmap">{ "imports": { "three": "./lib/three.module.js", "three/addons/": "./lib/jsm/" } }</script>
+<style>
+:root{--gold:#d9b46a;--gold2:#f0d9a6;--ink:#120d08;--panel:rgba(16,11,7,.78);--line:rgba(217,180,106,.45)}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:#000;font-family:'Cormorant Garamond',Georgia,serif;color:#f3e7cc}
+#view{position:fixed;inset:0;width:100%;height:100%;display:block}
+.cinzel{font-family:'Cinzel',serif;letter-spacing:.06em}
+/* ---------- mobil engeli ---------- */
+#mobilBlock{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:24px;background:radial-gradient(ellipse at center,#1b140c,#070503);text-align:center}
+#mobilBlock>div{max-width:440px}#mobilBlock svg{width:54px;height:62px;margin-bottom:10px}#mobilBlock .sub{font:600 13px 'Cinzel',serif;color:var(--gold);letter-spacing:.2em}
+#mobilBlock h2{margin:2px 0 18px;font:700 34px 'Cinzel',serif;letter-spacing:.08em;color:#f4e6c4}#mobilBlock p{margin:0 0 12px;font-size:20px;line-height:1.4;color:#e9dcc0}#mobilBlock p b{color:#f5c76f;font-weight:700}
+#mobilBlock .adr{margin-top:18px;font:13px ui-monospace,Menlo,monospace;color:#cdbb95;word-break:break-all}
+body.mobil #view,body.mobil #hud,body.mobil #intro,body.mobil #settings,body.mobil #journal,body.mobil #mapScreen,body.mobil #lockHint,body.mobil #storyCard,body.mobil #hpVig,body.mobil #fade{display:none!important}
+/* ---------- HUD ---------- */
+#hud{position:fixed;inset:0;pointer-events:none;z-index:5;transition:opacity .3s}#hud.hidden{opacity:0}
+#hud .tl{position:absolute;left:0;top:0;display:flex;gap:14px;align-items:center;padding:14px 26px 14px 18px;background:linear-gradient(90deg,rgba(10,7,4,.85),rgba(10,7,4,.55) 70%,transparent)}
+#hud .tl svg{width:40px;height:46px}#hud .tl h1{margin:0;font:700 26px 'Cinzel',serif;letter-spacing:.08em;color:#f4e6c4}#hud .tl p{margin:2px 0 0;font:600 15px 'Cinzel',serif;letter-spacing:.05em;color:#e7d6b0}
+#hud .date{position:absolute;left:50%;top:10px;transform:translateX(-50%);width:min(560px,46vw);text-align:center}
+#hud .date b{font:600 22px 'Cormorant Garamond',serif;color:#fbf0d8;text-shadow:0 1px 4px #000}
+.timeline{position:relative;height:30px;margin-top:6px}.timeline:before{content:'';position:absolute;left:4%;right:4%;top:9px;height:1.5px;background:linear-gradient(90deg,transparent,#e9d7ad 10%,#e9d7ad 90%,transparent)}
+.timeline span{position:absolute;top:4px;transform:translateX(-50%);font:600 15px 'Cormorant Garamond',serif;color:#efe2c4;text-shadow:0 1px 3px #000}.timeline span:before{content:'';display:block;width:8px;height:8px;border-radius:50%;background:#efe2c4;margin:0 auto 4px}
+.timeline span.now:before{background:#ff3b2a;box-shadow:0 0 10px #ff3b2a,0 0 2px #fff;width:11px;height:11px}
+#hud .tr{position:absolute;right:0;top:0;display:flex;gap:22px;padding:12px 22px;background:linear-gradient(270deg,rgba(10,7,4,.85),rgba(10,7,4,.5) 70%,transparent);pointer-events:auto}
+#hud .tr button{background:none;border:0;color:#f1e3c3;font:600 15px 'Cormorant Garamond',serif;text-align:center;cursor:pointer;line-height:1.15}#hud .tr button svg{display:block;margin:0 auto 4px;width:28px;height:28px}#hud .tr button.off{opacity:.45;cursor:default}
+#hud .obj{position:absolute;left:18px;top:96px;max-width:360px}
+#hud .obj h3{margin:0 0 8px;font:600 21px 'Cormorant Garamond',serif;display:flex;gap:10px;align-items:center;color:#f4e6c4;text-shadow:0 1px 3px #000}#hud .obj h3 i{display:inline-grid;place-items:center;width:24px;height:24px;transform:rotate(45deg);border:2px solid var(--gold);background:rgba(217,180,106,.25)}#hud .obj h3 i b{transform:rotate(-45deg);font-size:14px;color:var(--gold)}
+#hud .obj ul{list-style:none;margin:0;padding:10px 14px;background:var(--panel);border-left:2px solid var(--gold)}#hud .obj li{font-size:17px;padding:3px 0}#hud .obj li:before{content:'☐  ';color:#d8c7a3}#hud .obj li.done{opacity:.55}#hud .obj li.done:before{content:'☑  ';color:#a8d08d}#hud .obj li.sub{padding-left:18px;font-size:16px}
+#questMarks{position:absolute;inset:0;pointer-events:none;overflow:hidden}.qmark{position:absolute;transform:translate(-50%,-100%);text-align:center;font:600 13px 'Cinzel',serif;color:#f6ead0;text-shadow:0 1px 3px #000}.qmark i{display:block;width:16px;height:16px;margin:0 auto 5px;transform:rotate(45deg);border:2px solid var(--gold);background:rgba(217,180,106,.55);box-shadow:0 0 8px rgba(217,180,106,.7)}
+#orgBox li.done{color:#a8d08d}#orgBox li.done:after{content:'  ✓'}
+#mini{position:absolute;left:22px;bottom:22px;width:210px;height:210px;border-radius:50%;border:3px solid #e9d7ad;box-shadow:0 0 0 2px rgba(0,0,0,.6),0 6px 20px rgba(0,0,0,.6);overflow:hidden;background:#2a2016}
+#miniCanvas{width:100%;height:100%;display:block}#miniN{position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px;border-radius:50%;background:#120d08;border:1.5px solid #e9d7ad;font:700 12px 'Cinzel';display:grid;place-items:center;color:#f4e6c4}
+#coord{position:absolute;left:246px;bottom:24px;font:13px ui-monospace,Menlo,monospace;color:#e8dcc0;text-shadow:0 1px 2px #000;opacity:.85}
+#fps{position:absolute;right:16px;bottom:14px;font:12px ui-monospace,monospace;opacity:.6}
+#cross{position:absolute;left:50%;top:50%;width:4px;height:4px;margin:-2px;border-radius:50%;background:rgba(255,248,230,.7);box-shadow:0 0 2px #000}
+#npcSpeech{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.npcSay{position:absolute;transform:translate(-50%,-100%);max-width:260px;padding:5px 12px 6px;background:rgba(16,11,7,.86);border:1px solid var(--line);border-radius:3px;font:600 17px 'Cormorant Garamond',Georgia,serif;color:#f6ead0;text-align:center;line-height:1.2;white-space:normal;text-shadow:0 1px 2px #000}
+.npcSay b{display:block;font:700 12px 'Cinzel',serif;letter-spacing:.08em;color:var(--gold);margin-bottom:1px}
+#talkWho{display:block;margin-top:2px;font-size:15px;color:#e3d2ab}#talkWho:empty{display:none}
+#metBox .met{padding:7px 0;border-bottom:1px solid rgba(217,180,106,.18);font-size:15.5px;line-height:1.35;color:#e2d5b8}#metBox .met b{font-size:18px;color:#f4e6c4}#metBox .met span{color:#cdb98f}#metBox .met i{color:#d9cba8}
+.npcSay:after{content:'';position:absolute;left:50%;bottom:-6px;margin-left:-5px;border:5px solid transparent;border-top-color:rgba(217,180,106,.6);border-bottom:0}
+#talkHint{position:absolute;left:50%;top:56%;transform:translateX(-50%);display:none;background:var(--panel);border:1px solid var(--line);padding:4px 12px;font-size:17px}#talkHint kbd{font:600 13px 'Cinzel';background:#e9dcc0;color:#120d08;padding:1px 7px;margin-right:6px}
+#roleTag{position:absolute;left:18px;top:74px;display:none;font:600 13px 'Cinzel',serif;letter-spacing:.14em;color:var(--gold);text-shadow:0 1px 3px #000;text-transform:uppercase}
+#invTag{position:absolute;right:18px;bottom:64px;display:none;background:var(--panel);border-left:2px solid var(--gold);padding:5px 12px;font-size:17px;color:#f3e7cc}
+#ammo{position:absolute;right:18px;bottom:34px;display:none;font:600 20px 'Cinzel',serif;color:#f4e6c4;text-shadow:0 1px 4px #000}#ammo b{font-size:30px;color:#fff}#ammo i{font:italic 15px 'Cormorant Garamond',serif;color:#f5c76f;margin-left:8px}
+#hpVig{position:fixed;inset:0;z-index:4;pointer-events:none;opacity:0;background:radial-gradient(ellipse at center,transparent 38%,rgba(120,10,6,.85) 100%)}
+#fade{position:fixed;inset:0;z-index:7;pointer-events:none;background:#000;opacity:0;transition:opacity .45s}#fade.on{opacity:1;transition:opacity .15s}
+#storyCard{position:fixed;left:0;right:0;top:34%;z-index:8;text-align:center;pointer-events:none;opacity:0;transition:opacity 1.2s;padding:26px 20px;background:linear-gradient(90deg,transparent,rgba(8,5,3,.82) 22%,rgba(8,5,3,.82) 78%,transparent)}#storyCard.show{opacity:1}
+#storyCard b{display:block;font:700 34px 'Cinzel',serif;letter-spacing:.14em;color:#f4e6c4;text-shadow:0 2px 8px #000}#storyCard span{display:block;margin-top:8px;font:italic 500 22px 'Cormorant Garamond',serif;color:#e3d2ab}
+#lockHint{position:fixed;left:50%;bottom:16%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--line);padding:8px 16px;font-size:18px;display:none;z-index:6;pointer-events:none}
+/* ---------- giriş & yükleme ---------- */
+#intro{position:fixed;inset:0;z-index:20;display:grid;place-items:center;background:radial-gradient(ellipse at center,rgba(20,14,8,.55),rgba(8,5,3,.95)),#0b0805;transition:opacity .6s}#intro.hide{opacity:0;pointer-events:none}
+#intro .card{width:min(820px,92vw);background:rgba(18,12,7,.9);border:1px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.7)}
+#intro img{width:100%;height:240px;object-fit:cover;filter:sepia(.5) contrast(1.05);display:block;border-bottom:1px solid var(--line)}
+#intro .in{padding:22px 30px}#intro h2{margin:0;font:700 34px 'Cinzel',serif;letter-spacing:.08em}#intro .sub{font:600 15px 'Cinzel',serif;color:var(--gold);letter-spacing:.2em}
+#intro p{font-size:19px;line-height:1.45;color:#e9dcc0}#loadWrap{height:6px;background:rgba(255,255,255,.08);margin:14px 0 6px}#loadBar{height:100%;width:0;background:linear-gradient(90deg,#8e2b20,#d9b46a);transition:width .2s}
+#loadText{font-size:15px;color:#cdbb95;font-style:italic}#start{margin-top:12px;background:#8e2b20;color:#fff3dc;border:1px solid var(--gold);padding:11px 26px;font:700 16px 'Cinzel',serif;letter-spacing:.1em;cursor:pointer}#start:disabled{opacity:.35;cursor:wait}
+#loading.done #loadText{color:#a8d08d}
+.keys{font-size:15px;color:#cdbb95;margin-top:10px}.keys kbd{font-family:'Cinzel';border:1px solid var(--line);padding:0 6px;margin:0 2px;font-size:12px}
+#stats{font:12px ui-monospace,monospace;opacity:.6;margin-top:6px}
+/* ---------- ayarlar ---------- */
+#settings{position:fixed;right:20px;top:86px;width:340px;background:var(--panel);border:1px solid var(--line);padding:16px 18px;z-index:9;display:none;backdrop-filter:blur(6px)}#settings.show{display:block}
+#settings h3{margin:0 0 10px;font:700 17px 'Cinzel';letter-spacing:.1em;color:var(--gold2)}#settings label{display:block;font-size:16px;margin:10px 0 2px}#settings input[type=range]{width:100%}#settings select{width:100%;background:#1b140c;color:#f3e7cc;border:1px solid var(--line);font:inherit;padding:3px}
+#settings .go{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}#settings .go button{background:rgba(217,180,106,.12);border:1px solid var(--line);color:#f3e7cc;font:15px 'Cormorant Garamond';padding:3px 8px;cursor:pointer}
+/* ---------- günlük ---------- */
+#journal{position:fixed;left:50%;top:84px;bottom:40px;transform:translateX(-50%);width:min(1080px,94vw);z-index:11;display:none;background:rgba(14,10,6,.95);border:1px solid var(--line);padding:18px 24px;overflow:auto;scrollbar-width:thin;backdrop-filter:blur(6px)}#journal.show{display:block}
+#journal h2{margin:0 0 12px;font:700 26px 'Cinzel';letter-spacing:.12em;color:#f2e4c4}#journal h3{margin:0 0 10px;font:700 14px 'Cinzel';letter-spacing:.14em;color:var(--gold);border-bottom:1px solid rgba(217,180,106,.3);padding-bottom:5px}
+#journal h4{margin:0 0 4px;font:700 20px 'Cormorant Garamond';color:#f4e6c4}#journal p{margin:4px 0;font-size:16.5px;line-height:1.35;color:#e2d5b8}#journal .n{font-size:14.5px;font-style:italic;color:#cdb98f}#journal .g{font-size:15px;color:#a8d08d}#journal a{color:#f0c77a}
+#journalClose{position:absolute;right:18px;top:16px;background:rgba(18,12,7,.8);border:1px solid var(--line);color:#f3e7cc;font:600 14px 'Cinzel';padding:5px 11px;cursor:pointer}
+.jcols{display:grid;grid-template-columns:1.25fr 1fr;gap:28px}@media (max-width:820px){.jcols{grid-template-columns:1fr}}
+#chronoList h5{margin:14px 0 8px;font:700 22px 'Cinzel';letter-spacing:.1em;color:#f5c76f}#chronoList h5:first-child{margin-top:0}
+#chronoList .ev{position:relative;border-left:2px solid rgba(217,180,106,.35);padding:2px 0 12px 16px;margin-left:6px}#chronoList .ev:before{content:'';position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:#efe2c4}
+#chronoList .ev.cur{border-left-color:#ff3b2a}#chronoList .ev.cur:before{background:#ff3b2a;box-shadow:0 0 8px #ff3b2a}
+#chronoList .d{font:600 13px 'Cinzel';letter-spacing:.06em;color:#e3d2ab;margin-bottom:3px}#chronoList button{margin-top:5px;background:rgba(217,180,106,.12);border:1px solid var(--line);color:#f3e7cc;font:15px 'Cormorant Garamond';padding:3px 10px;cursor:pointer}#chronoList .ev.cur button{display:none}
+#orgBox .plan{margin:10px 0 14px;padding:8px 12px;border-left:2px solid var(--gold);background:rgba(217,180,106,.08);font-size:18px}#orgBox ul{margin:6px 0 12px;padding-left:20px;font-size:16.5px;color:#e2d5b8}#orgBox li{margin-bottom:3px}
+/* ---------- harita ekranı ---------- */
+#mapScreen{position:fixed;inset:0;z-index:12;display:none;background:#0d0906}#mapScreen.show{display:block}
+#mapCanvas{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
+.mtop{position:absolute;left:0;right:0;top:0;height:78px;background:linear-gradient(180deg,rgba(10,7,4,.95),rgba(10,7,4,.0));display:flex;align-items:center;justify-content:center;pointer-events:none}
+.brand{position:absolute;left:26px;top:10px}.brand h1{margin:0;font:700 34px 'Cinzel';letter-spacing:.09em;color:#f2e4c4;line-height:1}.brand .ay{font:600 15px 'Cinzel';letter-spacing:.55em;color:#e3d2ab;margin-left:6px}.brand .yr{font:600 20px 'Cinzel';letter-spacing:.18em;color:#e8d8b2;margin-top:4px}
+.tabs{display:flex;gap:6px;pointer-events:auto;align-items:center}.tabs button{background:none;border:0;color:#d9c9a5;font:500 20px 'Cormorant Garamond';padding:10px 22px;cursor:pointer;border-bottom:2px solid transparent}.tabs button.on{color:#f5c76f;border-bottom-color:#f5c76f;background:linear-gradient(0deg,rgba(245,199,111,.14),transparent)}
+.tabs kbd{font:600 13px 'Cinzel';border:1px solid #bfae8a;color:#e9dcc0;padding:2px 7px}
+.compass{position:absolute;right:30px;top:12px;width:120px;text-align:center;pointer-events:none}.compass svg{width:74px;height:74px}
+.lpanel{position:absolute;left:18px;top:130px;bottom:70px;width:300px;overflow:auto;background:linear-gradient(90deg,rgba(12,8,5,.92),rgba(12,8,5,.78));border:1px solid rgba(217,180,106,.25);padding:14px 16px;scrollbar-width:thin}
+.lpanel img{width:100%;height:120px;object-fit:cover;filter:sepia(.55);border:1px solid var(--line)}.lpanel h2{margin:10px 0 2px;font:700 22px 'Cormorant Garamond';color:#f4e6c4}.lpanel p{margin:4px 0 10px;font-size:15.5px;line-height:1.35;color:#ddd0b2}
+.lpanel h4{margin:14px 0 6px;font:700 14px 'Cinzel';letter-spacing:.14em;color:var(--gold);border-bottom:1px solid rgba(217,180,106,.3);padding-bottom:4px}
+#regionList label{display:flex;gap:8px;align-items:center;font-size:15.5px;padding:2px 0;cursor:pointer}#regionList i{width:11px;height:11px;display:inline-block;border:1px solid #000}#regionList em{font-size:13px;color:#b9a77f}
+.legend div{display:flex;gap:10px;align-items:center;font-size:15.5px;padding:2px 0}.legend span.ic{width:22px;height:22px;border-radius:50%;display:inline-grid;place-items:center;background:#8e2b20;border:2px solid #e8c27a;font-size:12px}.legend span.as{background:#3c2d1e;border-style:dashed}
+#assumpList{padding-left:16px;margin:0;font-size:14px;color:#cfbf9c}#assumpList li{margin-bottom:5px}
+.mbottom{position:absolute;left:0;right:0;bottom:0;height:56px;display:flex;gap:30px;align-items:center;justify-content:flex-end;padding:0 30px;background:linear-gradient(0deg,rgba(10,7,4,.95),rgba(10,7,4,0));font-size:17px;color:#e8dcc0;pointer-events:none}.mbottom kbd{font:600 13px 'Cinzel';background:#e9dcc0;color:#120d08;padding:2px 7px;margin-right:6px}
+#mapCoord{position:absolute;left:340px;bottom:20px;font:12px ui-monospace,monospace;color:#d9caa6}
+#mapClose{position:absolute;right:26px;top:96px;background:rgba(18,12,7,.8);border:1px solid var(--line);color:#f3e7cc;font:600 15px 'Cinzel';padding:6px 12px;cursor:pointer}
+#mapCard{position:absolute;right:26px;top:140px;width:340px;background:rgba(14,10,6,.94);border:1px solid var(--line);padding:14px 16px;display:none}#mapCard.show{display:block}#mapCard h3{margin:0 0 6px;font:700 21px 'Cormorant Garamond'}#mapCard p{font-size:15.5px;line-height:1.35;margin:8px 0}#mapCard .as{color:#d8b98a;font-style:italic}#mapCard .coord{font:12px ui-monospace,monospace;opacity:.7}#mapCard a{color:#f0c77a;font-size:14px}
+.tag{font:600 12px 'Cinzel';letter-spacing:.06em;padding:2px 8px;border:1px solid}.tag.ok{color:#a8d08d;border-color:#a8d08d}.tag.as{color:#e0b26a;border-color:#e0b26a;border-style:dashed}
+#tabNote{position:absolute;left:50%;top:84px;transform:translateX(-50%);background:rgba(14,10,6,.95);border:1px solid var(--line);padding:8px 14px;font-size:16px;opacity:0;transition:opacity .3s;pointer-events:none}#tabNote.show{opacity:1}
+@media (max-width:900px){.lpanel{display:none}#hud .obj{display:none}#hud .tr button span{display:none}#mini{width:150px;height:150px}#coord{display:none}}
+</style>
+</head>
+<body>
+<canvas id="view"></canvas>
+<div id="mobilBlock"><div>
+  <svg viewBox="0 0 40 46"><path d="M20 2 L24 8 L24 14 L32 14 L32 44 L8 44 L8 14 L16 14 L16 8Z M13 44 L13 30 Q20 21 27 30 L27 44" fill="none" stroke="#e9d7ad" stroke-width="2"/></svg>
+  <div class="sub">AYNTAB · 1918 – 1921</div><h2>GAZİANTEP</h2>
+  <p><b>Bu oyun şimdilik yalnızca bilgisayarda oynanıyor.</b></p>
+  <p>Klavye ve fare gerekiyor; telefon ve tablet henüz desteklenmiyor. Lütfen bu adresi bir bilgisayarın tarayıcısında açın.</p>
+  <p class="adr" id="mobilAdr"></p>
+</div></div>
+<script>document.getElementById('mobilAdr').textContent = location.host + location.pathname;</script>
+
+<div id="hud">
+  <div class="tl"><svg viewBox="0 0 40 46"><path d="M20 2 L24 8 L24 14 L32 14 L32 44 L8 44 L8 14 L16 14 L16 8Z M13 44 L13 30 Q20 21 27 30 L27 44" fill="none" stroke="#e9d7ad" stroke-width="2"/><path d="M8 14 l3 -4 3 4 M26 14 l3 -4 3 4" stroke="#e9d7ad" stroke-width="2" fill="none"/></svg>
+    <div><h1>GAZİANTEP</h1><p><span id="hudYear">1918</span> · <span id="hudPeriod">MÜTAREKE GÜNLERİ</span></p></div></div>
+  <div class="date"><b id="dateTxt">15 Mart 1920</b><div class="timeline"><span style="left:8%">1918</span><span class="now" style="left:33%">1919</span><span style="left:62%">1920</span><span style="left:90%">1921</span></div></div>
+  <div class="tr">
+    <button id="btnJournal"><svg viewBox="0 0 28 28"><path d="M3 5h9a3 3 0 0 1 3 3v16a3 3 0 0 0-3-3H3zM25 5h-9a3 3 0 0 0-3 3v16a3 3 0 0 1 3-3h9z" fill="none" stroke="#f1e3c3" stroke-width="1.6"/></svg>Günlük<br>[J]</button>
+    <button id="btnMap"><svg viewBox="0 0 28 28"><path d="M3 6l7-3 8 3 7-3v19l-7 3-8-3-7 3z M10 3v19 M18 6v19" fill="none" stroke="#f1e3c3" stroke-width="1.6"/></svg>Harita<br>[M]</button>
+    <button class="off" title="Bu aşamada kapalı"><svg viewBox="0 0 28 28"><path d="M8 9c0-3 2.5-5 6-5s6 2 6 5M5 9h18l-2 15H7z" fill="none" stroke="#f1e3c3" stroke-width="1.6"/></svg>Envanter<br>[I]</button>
+    <button id="btnSet"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="4" fill="none" stroke="#f1e3c3" stroke-width="1.6"/><path d="M14 2v4M14 22v4M2 14h4M22 14h4M5.5 5.5l2.8 2.8M19.7 19.7l2.8 2.8M5.5 22.5l2.8-2.8M19.7 8.3l2.8-2.8" stroke="#f1e3c3" stroke-width="1.6"/></svg>Ayarlar<br>[O]</button>
+  </div>
+  <div class="obj"><h3><i><b>!</b></i><span id="objTitle">Keşif Modu</span></h3><ul id="objList"><li>Kaleye çıkan rampayı bul.</li><li>Uzun Çarşı’dan hanlara yürü.</li><li>Haritayı aç (M) ve simge yapıları incele.</li></ul></div>
+  <div id="questMarks"></div>
+  <div id="roleTag"></div><div id="invTag"></div><div id="ammo"></div>
+  <div id="mini"><canvas id="miniCanvas"></canvas><div id="miniN">K</div></div>
+  <div id="talkHint"><kbd>E</kbd>Konuş<span id="talkWho"></span></div>
+  <div id="coord"></div><div id="fps"></div><div id="cross"></div>
+</div>
+<div id="ctxNote" style="display:none;position:fixed;left:50%;top:45%;transform:translateX(-50%);z-index:30;background:rgba(16,11,7,.92);border:1px solid rgba(217,180,106,.45);padding:14px 22px;font-size:19px"></div>
+<div id="hpVig"></div><div id="fade"></div>
+<div id="storyCard"><b></b><span></span></div>
+<div id="lockHint">Etrafa bakmak için ekrana tıkla</div>
+
+<div id="settings">
+  <h3>AYARLAR</h3>
+  <label>Göz yüksekliği: <b id="eyeV">1.70 m</b></label><input id="eye" type="range" min="1.65" max="1.75" step="0.01" value="1.70">
+  <label>Saat (<span id="todDate">15 Mart 1920</span>):<b id="todV">16:36</b></label><input id="tod" type="range" min="5.5" max="19.8" step="0.05" value="16.6">
+  <label>Görüş açısı: <b id="fovV">72°</b></label><input id="fov" type="range" min="55" max="95" step="1" value="72">
+  <label>Fare hassasiyeti</label><input id="sens" type="range" min="8" max="40" step="1" value="21">
+  <label>Grafik kalitesi: <b id="qualV"></b></label><select id="qual"><option value="auto">Otomatik (kare hızına göre)</option><option value="ultra">Ultra</option><option value="high">Yüksek</option><option value="medium">Orta</option><option value="low">Düşük</option></select>
+  <label>Hızlı git</label><div class="go"><button data-go="hero">★ Kalite testi sokağı</button><button data-go="kale">Kale</button><button data-go="millet">Millet Hanı</button><button data-go="zincirli">Zincirli Bedesten</button><button data-go="bakircilar">Bakırcılar</button><button data-go="alauddevle">Alaüddevle C.</button><button data-go="kendirli">Kendirli K.</button><button data-go="meryemana">Meryem Ana K.</button><button data-go="seyhfethullah">Şeyh Fethullah C.</button><button data-go="kolej">Central Turkey College</button></div>
+  <p style="font-size:14px;color:#cdbb95;margin:12px 0 0">N: serbest kamera (uçuş, Q/E alçal/yüksel) · C: çömel · H: arayüzü gizle</p>
+</div>
+
+<div id="journal">
+  <button id="journalClose">✕ Kapat [J]</button>
+  <h2>GÜNLÜK</h2>
+  <div class="jcols"><section><h3>KRONOLOJİ</h3><div id="chronoList"></div></section><section><h3>DİRENİŞ NASIL ÖRGÜTLENDİ?</h3><div id="orgBox"></div><h3 style="margin-top:22px">TANIDIKLAR</h3><div id="metBox"></div></section></div>
+</div>
+
+<div id="mapScreen">
+  <canvas id="mapCanvas"></canvas>
+  <div class="mtop"><div class="tabs"><kbd>Q</kbd><button data-off>Görevler</button><button data-off>Envanter</button><button class="on">Harita</button><button data-off>Günlük</button><button data-off>Kişiler</button><kbd>E</kbd></div></div>
+  <div class="brand"><h1>GAZİANTEP</h1><div class="ay">AYNTAB</div><div class="yr">1918 – 1921</div></div>
+  <div class="compass"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="24" fill="none" stroke="#e9d7ad" stroke-width="1"/><path d="M40 4 L45 40 L40 76 L35 40Z" fill="#e9d7ad"/><path d="M4 40 L40 35 L76 40 L40 45Z" fill="#bba778"/><path d="M40 4 L45 40 L40 40Z" fill="#fff6dd"/><text x="40" y="13" font-family="Cinzel" font-size="0" fill="#fff">K</text></svg><div style="font:700 15px Cinzel;margin-top:-82px;color:#f4e6c4">K</div></div>
+  <aside class="lpanel">
+    <img id="panelImg" alt="Eski Ayntab fotoğrafı">
+    <h2>Gaziantep (Ayntab)</h2>
+    <p>1918–1921: önce İngiliz, ardından Fransız işgali, 1 Nisan 1920 – 9 Şubat 1921 kuşatması ve 25 Aralık 1921 kurtuluşu. Bu harita, o yılların şehrini doğrulanmış yapı konumları ve açıkça işaretlenmiş varsayımlarla yeniden kurar.</p>
+    <h4>BÖLGELER</h4><div id="regionList"></div>
+    <h4>HARİTA İŞARETLERİ</h4>
+    <div class="legend"><div><span class="ic">♜</span>Kale / Hisar</div><div><span class="ic">☾</span>Cami / Mescit</div><div><span class="ic">✝</span>Kilise</div><div><span class="ic">⌂</span>Han / Bedesten</div><div><span class="ic">⚖</span>Çarşı / Arasta</div><div><span class="ic as">✎</span>Kolej / Okul</div><div><span class="ic as">✚</span>Hastane</div><div><span class="ic">•</span>Dolu çerçeve: konum kaynakla doğrulanmış</div><div><span class="ic as">•</span>Kesikli: tasarım varsayımı</div><div style="font-style:italic">İtalik mahalle adı: Houshamadyan planından türetilmiş yaklaşık konum</div></div>
+    <h4>VARSAYIMLAR</h4><ul id="assumpList"></ul>
+  </aside>
+  <button id="mapClose">✕ Kapat [M]</button>
+  <div id="mapCard"></div><div id="tabNote"></div><div id="mapCoord"></div>
+  <div class="mbottom"><span>🖱 Sürükle: Haritayı kaydır</span><span>Tekerlek: Yakınlaştır / Uzaklaştır</span><span><kbd>Sağ tık</kbd>İşaret koy</span><span><kbd>F</kbd>Konuma git</span><span><kbd>R</kbd>/<kbd>T</kbd>Yakın/Uzak</span><span><kbd>Esc</kbd>Kapat</span></div>
+</div>
+
+<div id="intro"><div class="card">
+  <img id="introImg" alt="Ayıntab, eski kartpostal">
+  <div class="in" id="loading">
+    <div class="sub">AYNTAB · 1918 – 1921</div><h2>GAZİANTEP</h2>
+    <p><b>Bir Şehrin 11 Ayı.</b> 17 Aralık 1918'de bir dükkân çırağı olarak başlıyorsunuz. İşgali, direnişin örgütlenmesini ve kuşatmanın ilk aylarını Antep sokaklarında yaşayın. Bölümler Günlük (J) içindeki kronolojiden de açılır.</p><p style="font-size:15px;color:#cdbb95">Deneme sürümü: prolog, Bölüm 1 ve Bölüm 2 oynanabilir. Karakter modelleri, tüfek ve sesler yer tutucudur.</p>
+    <div id="loadWrap"><div id="loadBar"></div></div><div id="loadText">Başlatılıyor…</div><div id="stats"></div>
+    <button id="start" disabled>ŞEHRE GİR</button>
+    <div class="keys"><kbd>W A S D</kbd> yürü · <kbd>Shift</kbd> koş · <kbd>Fare</kbd> bak · <kbd>M</kbd> harita · <kbd>E</kbd> konuş · <kbd>C</kbd> çömel · tüfek: <kbd>sol tık</kbd> ateş, <kbd>sağ tık</kbd> nişan, <kbd>R</kbd> doldur · <kbd>O</kbd> ayarlar · <kbd>N</kbd> serbest kamera</div>
+  </div></div></div>
+<script>document.getElementById('introImg').src=document.getElementById('panelImg').src='./assets/ayntab-kartpostal.jpg';</script>
+<script>
+// Mobil engeli: oyun şimdilik yalnız bilgisayarda (klavye + fare) oynanır ve sınanır. Telefon ve tablette oyun HİÇ yüklenmez
+// (veri ve pil harcanmaz); yalnız bilgilendirme ekranı gösterilir. Sınama için adresin sonuna ?zorla=1 eklenebilir.
+(function () {
+  var ua = navigator.userAgent || '';
+  var mobil = /Android|iPhone|iPad|iPod|Windows Phone|Mobile|Opera Mini|IEMobile/i.test(ua)
+    || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)                                   // iPadOS masaüstü kimliğiyle gelir
+    || (window.matchMedia && matchMedia('(pointer: coarse)').matches && !matchMedia('(any-pointer: fine)').matches);   // faresi olmayan dokunmatik cihaz
+  if (/[?&]zorla=1/.test(location.search)) mobil = false;
+  if (mobil) { document.body.classList.add('mobil'); document.getElementById('mobilBlock').style.display = 'grid'; return; }
+  import('./src/main.js').catch(function (e) { console.error(e); document.getElementById('loadText').textContent = 'Oyun yüklenemedi: ' + e.message; });
+})();
+</script>
+</body>
+</html>

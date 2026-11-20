@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="GraphicsProfile" format=3]
+
+[ext_resource type="Script" path="res://scripts/graphics_profile.gd" id="1_6d5x2"]
+
+[resource]
+script = ExtResource("1_6d5x2")
+surface_detail = true
+ad = "YÜKSEK"
+draw_distance = 1300.0
+detail_distance = 190.0
+shadow_distance = 170.0
+shadow_splits = 4
+render_scale = 1.0
+msaa = 1
+anisotropy = 4
+normal_maps = true
+glow = true
+ssao = true
+volumetric_fog = true
+npc_count = 30
+snow_particles = 700

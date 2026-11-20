@@ -1,0 +1,90 @@
+{
+  "_aciklama": "Karakter GLB'leri models/characters/ içine, yapı ve eşya GLB'leri models/props/ içine konur. Dosyası olmayan karakter yer tutucu mankenle çizilir. Ayrıntı: models/README.md",
+  "characters": [
+    {
+      "id": "K01",
+      "url": "models/characters/K01_yasli_esnaf.glb",
+      "walkSpeed": 1.3,
+      "clips": {}
+    },
+    {
+      "id": "K02",
+      "url": "models/characters/K02_sehirli_erkek.glb",
+      "walkSpeed": 1.3,
+      "clips": {}
+    },
+    {
+      "id": "K03",
+      "url": "models/characters/K03_ev_kadini.glb",
+      "walkSpeed": 1.3,
+      "clips": {}
+    },
+    {
+      "id": "K04",
+      "url": "models/characters/K04_cocuk.glb",
+      "walkSpeed": 1.3,
+      "clips": {}
+    },
+    {
+      "id": "K05",
+      "url": "models/characters/K05_su_tasiyan_kadin.glb",
+      "walkSpeed": 1.3,
+      "clips": {}
+    },
+    {
+      "id": "K06",
+      "url": "models/characters/K06_hamal.glb",
+      "walkSpeed": 1.3,
+      "clips": {}
+    },
+    {
+      "id": "K07",
+      "url": "models/characters/K07_muzisyen.glb",
+      "walkSpeed": 1.3,
+      "clips": {}
+    },
+    {
+      "id": "K08",
+      "url": "models/characters/K08_kuvayi_milliye.glb",
+      "walkSpeed": 1.3,
+      "clips": {}
+    },
+    {
+      "id": "K09",
+      "url": "models/characters/K09_fransiz_piyade.glb",
+      "walkSpeed": 1.3,
+      "clips": {}
+    },
+    {
+      "id": "K10",
+      "url": "models/characters/K10_fransiz_subayi.glb",
+      "walkSpeed": 1.3,
+      "clips": {}
+    },
+    {
+      "id": "K11",
+      "url": "models/characters/K11_genc_kadin.glb",
+      "walkSpeed": 1.3,
+      "clips": {}
+    },
+    {
+      "id": "K12",
+      "url": "models/characters/K12_yasli_kadin.glb",
+      "walkSpeed": 1.3,
+      "clips": {}
+    },
+    {
+      "id": "K13",
+      "url": "models/characters/K13_fransiz_makineli.glb",
+      "walkSpeed": 1.3,
+      "clips": {}
+    },
+    {
+      "id": "K14",
+      "url": "models/characters/K14_yardimci_birlik.glb",
+      "walkSpeed": 1.3,
+      "clips": {}
+    }
+  ],
+  "models": []
+}

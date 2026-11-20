@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GraphicsProfile" format=3]
+
+[ext_resource type="Script" path="res://scripts/graphics_profile.gd" id="1_85pcr"]
+
+[resource]
+script = ExtResource("1_85pcr")
+surface_detail = true
+ad = "ORTA"
+draw_distance = 800.0
+detail_distance = 150.0
+shadow_distance = 95.0
+render_scale = 1.0
+anisotropy = 3
+normal_maps = true
+glow = true
+npc_count = 20
+snow_particles = 500

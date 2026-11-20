@@ -1,0 +1,16 @@
+{
+  "_aciklama": "Her set bir klasördür: color.jpg (zorunlu), normal.jpg, roughness.jpg, ao.jpg. size = görüntünün kapladığı gerçek genişlik (metre). Klasörü boş olan set prosedürel dokuyla çalışır. Ayrıntı: textures/README.md",
+  "sets": {
+    "stone":  { "size": 3 },
+    "stone2": { "size": 3 },
+    "basalt": { "size": 3 },
+    "cobble": { "size": 4 },
+    "dirt":   { "size": 6 },
+    "grass":  { "size": 5 },
+    "field":  { "size": 9 },
+    "planks": { "size": 1 },
+    "wood":   { "size": 1 },
+    "tiles":  { "size": 2 },
+    "flat":   { "size": 3 }
+  }
+}

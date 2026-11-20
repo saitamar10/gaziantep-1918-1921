@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Atmosphere" format=3]
+
+[ext_resource type="Script" path="res://scripts/atmosphere.gd" id="1_yo1t7"]
+
+[resource]
+script = ExtResource("1_yo1t7")
+ad = "Gün batımı"
+sun_color = Color(1, 0.72, 0.46, 1)
+sun_energy = 1.1
+sun_elevation = -8.0
+sun_azimuth = -105.0
+ambient_color = Color(0.5, 0.5, 0.6, 1)
+ambient_energy = 0.62
+fog_color = Color(0.84, 0.7, 0.6, 1)
+haze = 0.8
+fog_begin = 30.0
+fog_end = 1100.0
+sky_top = Color(0.24, 0.3, 0.52, 1)
+sky_horizon = Color(0.96, 0.7, 0.48, 1)
+ground_horizon = Color(0.6, 0.5, 0.42, 1)
+cloud_color = Color(1, 0.78, 0.6, 1)
+cloud_cover = 0.5
+contrast = 1.1
